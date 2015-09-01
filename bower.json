@@ -1,6 +1,6 @@
 {
   "name": "n4dateinput",
-  "main": "n4dateinput.js",
+  "main": "dist/n4dateinput.js",
   "version": "0.0.1",
   "homepage": "https://github.com//n4dateinput",
   "authors": [
