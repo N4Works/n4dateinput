@@ -108,6 +108,15 @@ describe('n4DateInput', function() {
       expect($scope.value).toEqual(new Date('01/14/2015'));
     });
 
+    it('Should format the element when a valid date is inputed', function() {
+      element.val('14012015');
+      element.trigger('change');
+      $scope.$apply();
+      $scope.$digest();
+      expect($scope.value).toEqual(new Date('01/14/2015'));
+      expect(element.val()).toEqual('14/01/2015');
+    });
+
     it('Should set null on the scope when an invalid date is set', function() {
       element.val('01142015');
       element.trigger('change');
