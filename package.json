@@ -1,5 +1,5 @@
 {
-  "name": "n4-dateInput-directive",
+  "name": "n4-dateinput-directive",
   "version": "1.0.0",
   "main": "dist/n4dateinput.js",
   "keywords": [

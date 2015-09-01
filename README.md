@@ -10,13 +10,13 @@ Angular directive to get and set date value from an input.
 # how to install
 
 ```
-npm install n4-dateInput-directive --save
+npm install n4-dateinput-directive --save
 ```
 
 or
 
 ```
-bower install n4-dateInput-directive --save
+bower install n4-dateinput-directive --save
 ```
 
 # how to use
