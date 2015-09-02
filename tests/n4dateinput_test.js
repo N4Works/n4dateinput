@@ -8,6 +8,9 @@ describe('n4DateInput', function() {
   beforeEach(inject(function(_$rootScope_, _$compile_) {
     $scope = _$rootScope_.$new();
     $compile = _$compile_;
+
+    spyOn($.fn, 'on').and.callThrough();
+    spyOn($.fn, 'off').and.callThrough();
   }));
 
   describe('Creation', function() {
@@ -20,6 +23,7 @@ describe('n4DateInput', function() {
       expect(element[0].tagName).toBe('INPUT');
       expect(element[0].placeholder).toBe('00/00/0000');
       expect(element[0].maxLength).toBe(10);
+      expect(element.on).toHaveBeenCalled();
     });
 
     it('Should be able to create directive by class', function() {
@@ -31,6 +35,7 @@ describe('n4DateInput', function() {
       expect(element[0].tagName).toBe('INPUT');
       expect(element[0].placeholder).toBe('00/00/0000');
       expect(element[0].maxLength).toBe(10);
+      expect(element.on).toHaveBeenCalled();
     });
 
     it('Should be able to create directive by attribute', function() {
@@ -42,6 +47,7 @@ describe('n4DateInput', function() {
       expect(element[0].tagName).toBe('INPUT');
       expect(element[0].placeholder).toBe('00/00/0000');
       expect(element[0].maxLength).toBe(10);
+      expect(element.on).toHaveBeenCalled();
     });
 
     it('Should be able to create directive defining a custom placeholder', function() {
@@ -53,6 +59,7 @@ describe('n4DateInput', function() {
       expect(element[0].tagName).toBe('INPUT');
       expect(element[0].placeholder).toBe('dia/mês/ano');
       expect(element[0].maxLength).toBe(10);
+      expect(element.on).toHaveBeenCalled();
     });
   });
 
@@ -108,12 +115,14 @@ describe('n4DateInput', function() {
       expect($scope.value).toEqual(new Date('01/14/2015'));
     });
 
-    it('Should format the element when a valid date is inputed', function() {
+    it('Should format the element on blur when a valid date is inputed', function() {
       element.val('14012015');
       element.trigger('change');
       $scope.$apply();
       $scope.$digest();
       expect($scope.value).toEqual(new Date('01/14/2015'));
+      expect(element.val()).toEqual('14012015');
+      element.trigger('blur');
       expect(element.val()).toEqual('14/01/2015');
     });
 
@@ -145,6 +154,22 @@ describe('n4DateInput', function() {
       $scope.$apply();
       expect(element.val()).toEqual('01012');
       expect($scope.value).toEqual(null);
+    });
+  });
+
+  describe('Destruction', function() {
+    var element;
+
+    beforeEach(function() {
+      element = angular.element('<input n4-date-input="" data-ng-model="value" placeholder="dia/mês/ano">');
+      $compile(element)($scope);
+      $scope.$apply();
+    });
+
+    it('Should remove event listener on destroy', function() {
+      $scope.$broadcast('$destroy');
+
+      expect(element.off).toHaveBeenCalledWith('blur');
     });
   });
 });

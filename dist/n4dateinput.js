@@ -53,9 +53,6 @@
                   regexp = new RegExp('^(\\d{2})/(\\d{2})/(\\d{4})$', 'gi');
 
                 var date = regexp.test(formattedValue) ? new Date(formattedValue.replace(regexp, '$2/$1/$3')) : null;
-                if (!!date) {
-                  element.val(formattedValue);
-                }
                 return date;
               };
 
@@ -64,8 +61,16 @@
             }
             element.attr('maxlength', 10);
 
+            element.on('blur', function () {
+              element.val(formatValue(element.val()));
+            });
+
             controller.$formatters.push(formatValue);
             controller.$parsers.push(parseValue);
+
+            scope.$on('$destroy', function () {
+              element.off('blur');
+            });
           }
         };
       }
