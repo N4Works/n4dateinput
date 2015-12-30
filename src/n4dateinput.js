@@ -46,6 +46,12 @@
                   return returnValue(new Date(value));
                 }
 
+                regexp = new RegExp("^\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}:\\d{2}.*$");
+                if (regexp.test(value)) {
+                  date = new Date(value);
+                  return returnValue(date);
+                }
+
                 return value;
               },
               parseValue = function(value) {

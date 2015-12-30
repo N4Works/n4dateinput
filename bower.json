@@ -1,7 +1,7 @@
 {
   "name": "n4-dateinput-directive",
   "main": "dist/n4dateinput.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com//n4dateinput",
   "authors": [
     "N4Works <contato@n4works.com>"
